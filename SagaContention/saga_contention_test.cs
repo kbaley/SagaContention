@@ -1,4 +1,8 @@
-﻿namespace SagaContention
+﻿using NServiceBus.AcceptanceTests.Recoverability;
+using NServiceBus.Persistence.Sql;
+
+[assembly: SqlPersistenceSettings(MsSqlServerScripts = true)]
+namespace SagaContention
 {
     using System;
     using System.Diagnostics;
@@ -15,11 +19,6 @@
     [TestFixture]
     public class When_storing_saga_with_high_contention : NServiceBusAcceptanceTest
     {
-        [Test]
-        public void Run()
-        {
-            Assert.IsTrue(1 == 1);
-        }
         //[Ignore("only for manual execution")]
         [Test]
         [Repeat(20)]
@@ -51,7 +50,7 @@
 
             public TimeSpan Elapsed => Watch.Elapsed;
 
-            public int NumberOfMessages { get; } = 20;
+            public int NumberOfMessages { get; } = 200;
 
             public long NumberOfRetries => Interlocked.Read(ref numberOfRetries);
 
@@ -108,6 +107,7 @@
                         await context.SendLocal(new DoneSaga { SomeId = message.SomeId, HitCount = Data.Hit });
                     }
                 }
+
             }
 
             class CreateLoadHandler : IHandleMessages<FireInTheWhole>

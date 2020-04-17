@@ -18,6 +18,9 @@ class ConfigureEndpointPersistence : IConfigureEndpointTestExecution
         persistence.SqlDialect<SqlDialect.MsSqlServer>();
         persistence.ConnectionBuilder(
             connectionBuilder: () => new SqlConnection(containerConnectionString));
+        var subscriptions = persistence.SubscriptionSettings();
+        subscriptions.DisableCache();
+        // persistence.DisableInstaller();
 
 
         return Task.FromResult(0);

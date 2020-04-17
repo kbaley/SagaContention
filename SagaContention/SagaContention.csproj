@@ -1,19 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <TargetFrameworks>net461;netcoreapp3.1</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="nservicebus.acceptancetesting" Version="7.2.3" />
     <PackageReference Include="nservicebus.acceptancetests.sources" Version="7.2.3" />
     <PackageReference Include="nservicebus.persistence.sql" Version="5.0.0" />
     <PackageReference Include="nunit" Version="3.12.0" />
     <PackageReference Include="nunit3testadapter" Version="3.16.1" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.1" />
   </ItemGroup>
-  <PropertyGroup>
-    <SqlPersistenceGenerateScripts>false</SqlPersistenceGenerateScripts>
-  </PropertyGroup>
 
 </Project>
