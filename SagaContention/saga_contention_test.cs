@@ -19,12 +19,15 @@ namespace SagaContention
     [TestFixture]
     public class When_storing_saga_with_high_contention : NServiceBusAcceptanceTest
     {
+        const string statsFileLocation = @"c:\temp\saga.contention.stats.txt";
+
         //[Ignore("only for manual execution")]
         [Test]
-        [Repeat(20)]
-        public async Task Should_use_saga_data_type_name() {
+        //[Repeat(20)]
+        public async Task Should_use_saga_data_type_name()
+        {
 
-            File.AppendAllText(@"d:\data\saga.contention.stats.txt", string.Empty);
+            File.AppendAllText(statsFileLocation, string.Empty);
 
             var context = await Scenario.Define<Context>()
                 .WithEndpoint<SagaEndpoint>(b => b
@@ -35,7 +38,7 @@ namespace SagaContention
             Console.WriteLine(context.Elapsed);
             Console.WriteLine(context.NumberOfRetries);
 
-            File.AppendAllText(@"d:\data\saga.contention.stats.txt", $"{context.Elapsed}; {context.NumberOfMessages}; {context.NumberOfRetries}{Environment.NewLine}");
+            File.AppendAllText(statsFileLocation, $"{context.Elapsed}; {context.NumberOfMessages}; {context.NumberOfRetries}{Environment.NewLine}");
         }
 
         public class Context : ScenarioContext
@@ -54,19 +57,24 @@ namespace SagaContention
 
             public long NumberOfRetries => Interlocked.Read(ref numberOfRetries);
 
-            public void IncrementNumberOfRetries() {
+            public void IncrementNumberOfRetries()
+            {
                 Interlocked.Increment(ref numberOfRetries);
             }
         }
 
         public class SagaEndpoint : EndpointConfigurationBuilder
         {
-            public SagaEndpoint() {
-                EndpointSetup<DefaultServer, Context>((b, c) => {
+            public SagaEndpoint()
+            {
+                EndpointSetup<DefaultServer, Context>((b, c) =>
+                {
                     b.LimitMessageProcessingConcurrencyTo(c.NumberOfMessages);
                     var recoverability = b.Recoverability();
-                    recoverability.Immediate(s => {
-                        s.OnMessageBeingRetried(m => {
+                    recoverability.Immediate(s =>
+                    {
+                        s.OnMessageBeingRetried(m =>
+                        {
                             c.IncrementNumberOfRetries();
                             return Task.FromResult(0);
                         });
@@ -76,16 +84,21 @@ namespace SagaContention
                 });
             }
 
-            public class HighContentionSaga : Saga<HighContentionSaga.HighContentionSagaData>, IAmStartedByMessages<StartSaga>, IHandleMessages<AdditionalMessage>
+            public class HighContentionSaga : 
+                Saga<HighContentionSaga.HighContentionSagaData>, 
+                IAmStartedByMessages<StartSaga>, 
+                IHandleMessages<AdditionalMessage>
             {
                 public Context TestContext { get; set; }
 
-                protected override void ConfigureHowToFindSaga(SagaPropertyMapper<HighContentionSagaData> mapper) {
+                protected override void ConfigureHowToFindSaga(SagaPropertyMapper<HighContentionSagaData> mapper)
+                {
                     mapper.ConfigureMapping<StartSaga>(m => m.SomeId).ToSaga(d => d.SomeId);
                     mapper.ConfigureMapping<AdditionalMessage>(m => m.SomeId).ToSaga(d => d.SomeId);
                 }
 
-                public Task Handle(StartSaga message, IMessageHandlerContext context) {
+                public Task Handle(StartSaga message, IMessageHandlerContext context)
+                {
                     Data.SomeId = message.SomeId;
                     TestContext.Watch.Start();
                     TestContext.SagaStarted = true;
@@ -99,26 +112,29 @@ namespace SagaContention
                     public Guid SomeId { get; set; }
                 }
 
-                public async Task Handle(AdditionalMessage message, IMessageHandlerContext context) {
+                public async Task Handle(AdditionalMessage message, IMessageHandlerContext context)
+                {
                     Data.Hit++;
 
-                    if (Data.Hit >= TestContext.NumberOfMessages) {
+                    if (Data.Hit >= TestContext.NumberOfMessages)
+                    {
                         MarkAsComplete();
                         await context.SendLocal(new DoneSaga { SomeId = message.SomeId, HitCount = Data.Hit });
                     }
                 }
-
             }
 
             class CreateLoadHandler : IHandleMessages<FireInTheWhole>
             {
                 readonly Context testContext;
 
-                public CreateLoadHandler(Context testContext) {
+                public CreateLoadHandler(Context testContext)
+                {
                     this.testContext = testContext;
                 }
 
-                public async Task Handle(FireInTheWhole message, IMessageHandlerContext context) {
+                public async Task Handle(FireInTheWhole message, IMessageHandlerContext context)
+                {
                     await Task.WhenAll(Enumerable.Range(0, testContext.NumberOfMessages).Select(i => context.SendLocal(new AdditionalMessage { SomeId = message.SomeId })));
                     testContext.MessagesSent = true;
                 }
@@ -128,11 +144,13 @@ namespace SagaContention
             {
                 readonly Context testContext;
 
-                public DoneHandler(Context testContext) {
+                public DoneHandler(Context testContext)
+                {
                     this.testContext = testContext;
                 }
 
-                public Task Handle(DoneSaga message, IMessageHandlerContext context) {
+                public Task Handle(DoneSaga message, IMessageHandlerContext context)
+                {
                     testContext.Watch.Stop();
                     testContext.HitCount = message.HitCount;
                     testContext.Done = true;

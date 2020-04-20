@@ -14,6 +14,12 @@ class ConfigureEndpointPersistence : IConfigureEndpointTestExecution
     public Task Configure(string endpointName, EndpointConfiguration configuration, RunSettings settings, PublisherMetadata publisherMetadata) {
         var containerConnectionString = @"Data Source=localhost;Initial Catalog=nsb;Integrated Security=True";
 
+        var replacementConnectionString = Environment.GetEnvironmentVariable("NServiceBus_SagaContention");
+        if (!string.IsNullOrEmpty(replacementConnectionString))
+            containerConnectionString = replacementConnectionString;
+
+        //configuration.EnableInstallers();
+
         var persistence = configuration.UsePersistence<SqlPersistence>();
         persistence.SqlDialect<SqlDialect.MsSqlServer>();
         persistence.ConnectionBuilder(
