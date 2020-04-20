@@ -53,7 +53,7 @@ namespace SagaContention
 
             public TimeSpan Elapsed => Watch.Elapsed;
 
-            public int NumberOfMessages { get; } = 200;
+            public int NumberOfMessages { get; } = 2000;
 
             public long NumberOfRetries => Interlocked.Read(ref numberOfRetries);
 
@@ -69,7 +69,7 @@ namespace SagaContention
             {
                 EndpointSetup<DefaultServer, Context>((b, c) =>
                 {
-                    b.LimitMessageProcessingConcurrencyTo(c.NumberOfMessages);
+                    b.LimitMessageProcessingConcurrencyTo(Environment.ProcessorCount);
                     var recoverability = b.Recoverability();
                     recoverability.Immediate(s =>
                     {

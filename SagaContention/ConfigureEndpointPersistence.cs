@@ -7,18 +7,18 @@ using System.Data.SqlClient;
 
 class ConfigureEndpointPersistence : IConfigureEndpointTestExecution
 {
-    public Task Cleanup() {
+    public Task Cleanup()
+    {
         return Task.CompletedTask;
     }
 
-    public Task Configure(string endpointName, EndpointConfiguration configuration, RunSettings settings, PublisherMetadata publisherMetadata) {
+    public Task Configure(string endpointName, EndpointConfiguration configuration, RunSettings settings, PublisherMetadata publisherMetadata)
+    {
         var containerConnectionString = @"Data Source=localhost;Initial Catalog=nsb;Integrated Security=True";
 
         var replacementConnectionString = Environment.GetEnvironmentVariable("NServiceBus_SagaContention");
         if (!string.IsNullOrEmpty(replacementConnectionString))
             containerConnectionString = replacementConnectionString;
-
-        //configuration.EnableInstallers();
 
         var persistence = configuration.UsePersistence<SqlPersistence>();
         persistence.SqlDialect<SqlDialect.MsSqlServer>();
@@ -26,8 +26,6 @@ class ConfigureEndpointPersistence : IConfigureEndpointTestExecution
             connectionBuilder: () => new SqlConnection(containerConnectionString));
         var subscriptions = persistence.SubscriptionSettings();
         subscriptions.DisableCache();
-        // persistence.DisableInstaller();
-
 
         return Task.FromResult(0);
     }
