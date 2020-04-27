@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SagaContention.SqlOptimisti
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SagaContention", "SagaContention\SagaContention.csproj", "{448577A0-49B2-41CB-A4CE-B4B3B9492C5B}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MongoDB.Pessimistic", "MongoDB.Pessimistic\MongoDB.Pessimistic.csproj", "{9F2990B5-159D-4B07-AAAB-122785D34469}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MongoDB.Optimistic", "MongoDB.Optimistic\MongoDB.Optimistic.csproj", "{A57D8D2F-CE8F-4A46-B47E-E5BAD995435D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{448577A0-49B2-41CB-A4CE-B4B3B9492C5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{448577A0-49B2-41CB-A4CE-B4B3B9492C5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{448577A0-49B2-41CB-A4CE-B4B3B9492C5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F2990B5-159D-4B07-AAAB-122785D34469}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F2990B5-159D-4B07-AAAB-122785D34469}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F2990B5-159D-4B07-AAAB-122785D34469}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F2990B5-159D-4B07-AAAB-122785D34469}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A57D8D2F-CE8F-4A46-B47E-E5BAD995435D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A57D8D2F-CE8F-4A46-B47E-E5BAD995435D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A57D8D2F-CE8F-4A46-B47E-E5BAD995435D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A57D8D2F-CE8F-4A46-B47E-E5BAD995435D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
