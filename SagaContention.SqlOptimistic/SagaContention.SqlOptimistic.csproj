@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net461;netcoreapp2.1</TargetFrameworks>
+    <TargetFrameworks>net472</TargetFrameworks>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net461|AnyCPU'">
@@ -9,14 +9,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="nservicebus" Version="7.2.4" />
+    <PackageReference Include="microsoft.net.test.sdk" Version="16.6.1" />
     <PackageReference Include="nservicebus.acceptancetesting" Version="7.2.4" />
-    <PackageReference Include="nservicebus.persistence.sql" Version="5.0.0" />
-    <PackageReference Include="nunit" Version="3.12.0" />
-    <PackageReference Include="nunit3testadapter" Version="3.16.1">
+    <PackageReference Include="nservicebus.persistence.sql" Version="4.0.0" />
+    <PackageReference Include="nservicebus.persistence.sql.msbuild" Version="4.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="nunit" Version="3.12.0" />
+    <PackageReference Include="nunit3testadapter" Version="3.12.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.1" />
   </ItemGroup>
 

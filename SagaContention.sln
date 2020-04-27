@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29920.165
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SagaContention", "SagaContention\SagaContention.csproj", "{EC89B88B-6FD2-42E9-B2AF-079206530449}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SagaContention.SqlOptimistic", "SagaContention.SqlOptimistic\SagaContention.SqlOptimistic.csproj", "{9292DC3F-2157-4DD1-B984-F7A871D678E6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SagaContention", "SagaContention\SagaContention.csproj", "{448577A0-49B2-41CB-A4CE-B4B3B9492C5B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{EC89B88B-6FD2-42E9-B2AF-079206530449}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EC89B88B-6FD2-42E9-B2AF-079206530449}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EC89B88B-6FD2-42E9-B2AF-079206530449}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EC89B88B-6FD2-42E9-B2AF-079206530449}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9292DC3F-2157-4DD1-B984-F7A871D678E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9292DC3F-2157-4DD1-B984-F7A871D678E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9292DC3F-2157-4DD1-B984-F7A871D678E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9292DC3F-2157-4DD1-B984-F7A871D678E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{448577A0-49B2-41CB-A4CE-B4B3B9492C5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{448577A0-49B2-41CB-A4CE-B4B3B9492C5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{448577A0-49B2-41CB-A4CE-B4B3B9492C5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{448577A0-49B2-41CB-A4CE-B4B3B9492C5B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
